@@ -114,6 +114,6 @@ def posicoes_dividendos(cash_position):
     print('------------------------------------')
 
 
-# calcular_dividendos()
-# calcular_posicoes()
-posicoes_dividendos(7500)
+#calcular_dividendos()
+#calcular_posicoes()
+posicoes_dividendos(8000)
