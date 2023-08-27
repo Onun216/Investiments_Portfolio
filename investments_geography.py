@@ -5,6 +5,10 @@ from openpyxl.worksheet.worksheet import Worksheet
 from plotly.graph_objs import Scattergeo, Layout
 from plotly import offline
 
+"""
+See investments portfolio by geography
+For the moment, only location is considered
+"""
 file = load_workbook('Empresas_GPS.xlsx', data_only=True)
 file_sheets = file.sheetnames
 
@@ -91,5 +95,4 @@ data = [{
 
 fig = {'data': data, 'layout': my_layout}
 offline.plot(fig, filename='portfolio_distribution.html')
-
 
