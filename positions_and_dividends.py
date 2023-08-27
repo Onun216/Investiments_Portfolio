@@ -8,7 +8,7 @@ file_sheets = file.sheetnames
 dividend_color = 'FFFFFF00'  # yellow
 enter_position_color = 'FF00FF00'  # green
 close_position_color = 'FFFF0000'  # red
-total_dividendos = []
+total_dividends = []
 total_position = []
 
 
@@ -28,7 +28,7 @@ total_position = []
 # }
 
 
-def calcular_dividendos():
+def get_dividends():
     ano = 2022
     for sheet in file_sheets:
         fs = file[sheet]
@@ -43,14 +43,14 @@ def calcular_dividendos():
                 if bgColor == dividend_color:
                     dividends.append(cell_value)
                 total = sum(dividends)
-        total_dividendos.append(total)
+        total_dividends.append(total)
         print(f'Dividendos de %s: €{total:.2f}' % ano)
         ano += 1
-    print(f'Total: €{round(sum(total_dividendos), 2)}')
+    print(f'Total: €{round(sum(total_dividends), 2)}')
     print('------------------------------------')
 
 
-def calcular_posicoes():
+def get_posicoes():
     ano = 2022
     for sheet in file_sheets:
         fs = file[sheet]
@@ -76,7 +76,10 @@ def calcular_posicoes():
     print(f'Total: €{round(sum(total_position), 2)}')
 
 
-def posicoes_dividendos(cash_position):
+cash_position = input("Insira o valor actual disponível para investir: ")
+
+
+def total_positions_and_dividends(cash_position):
     ano = 2022
     for sheet in file_sheets:
         fs = file[sheet]
@@ -91,8 +94,8 @@ def posicoes_dividendos(cash_position):
                 bgColor = cell.fill.bgColor.index
                 if not isinstance(cell_value, float):
                     continue
-                #if bgColor == close_position_color:
-                    #continue
+                # if bgColor == close_position_color:
+                # continue
                 if bgColor == dividend_color:
                     dividends.append(cell_value)
                 total_div = sum(dividends)
@@ -100,20 +103,18 @@ def posicoes_dividendos(cash_position):
                     position.append(cell_value)
                 total_pos = round(sum(position), 2)
 
-        total_dividendos.append(total_div)
+        total_dividends.append(total_div)
         print(f'Dividendos de %s: €{total_div:.2f}' % ano)
 
-        total_position.append(total_pos)
-        print(f'Posição em %s: €{total_position}' % ano)
-        #print(position)
+        # total_position.append(total_pos)
+        # print(f'Posição em %s: €{total_position}' % ano)
+        # print(position)
 
         ano += 1
-    print(f'Total: €{round(sum(total_position), 2)}')
-    print(f'Total (dividendos): €{round(sum(total_dividendos), 2)}')
+    # print(f'Custo actual das posições: €{round(sum(total_position), 2)}')
+    print(f'Total (dividendos): €{round(sum(total_dividends), 2)}')
     print(f'Total (CASH): €{cash_position}')
     print('------------------------------------')
 
 
-#calcular_dividendos()
-#calcular_posicoes()
-posicoes_dividendos(8000)
+total_positions_and_dividends(cash_position)
